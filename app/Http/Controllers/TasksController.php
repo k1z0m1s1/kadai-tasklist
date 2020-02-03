@@ -97,6 +97,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd('suda');
         $this->validate($request,[
             'status'=>'required|max:10',
             'content'=>'required|max:191',

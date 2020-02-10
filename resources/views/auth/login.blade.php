@@ -16,11 +16,11 @@
 
                 <div class="form-group">
                     {!! Form::label('password','Password') !!}
-                    {!! Form::password('password',old('password'),['class' => 'form-control'])
+                    {!! Form::password('password',['class' => 'form-control']) !!}
                 </div>
                 
-                <p>{!! Form::submit('ログイン',['class' =>'btn btn-primary btn-block']) !!}</p>
-            {!! Form::close()!!}
+                <p>{!! Form::submit('ログイン',['class' => 'btn btn-primary btn-block']) !!}</p>
+            {!! Form::close() !!}
             
             <p class="mt-2">会員登録はお済みですか？{!! link_to_route('signup.get','新規会員登録') !!}</p>
             

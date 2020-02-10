@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="texr-center">
+    <div class="text-center">
         <h1>Sign up</h1>
     </div>
     
     <div class="row">
-        <div class="col-sm-6 offser-sm-3">
+        <div class="col-sm-6 offset-sm-3">
             
             {!! Form::open( ['route' => 'signup.post'] ) !!}
                 <div class="form-group">

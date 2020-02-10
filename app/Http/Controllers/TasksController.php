@@ -80,12 +80,16 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
-        
-        return view('tasks.show',[
-            'task' => $task,
+            $task = Task::find($id);
+
+        if(\Auth::id() === $task->user_id){
+
+            
+            return view('tasks.show',[
+                'task' => $task,
             ]);
-        
+        }
+        return redirect('/');
     }
 
     /**
@@ -96,11 +100,16 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::find($id);
-        
-        return view('tasks.edit',[
-            'task'=>$task,
+            $task = Task::find($id);
+
+        if(\Auth::id() === $task->user_id){
+            
+            return view('tasks.edit',[
+                'task'=>$task,
             ]);
+            
+        }
+        return redirect('/');
     }
 
     /**
@@ -113,15 +122,18 @@ class TasksController extends Controller
     public function update(Request $request, $id)
     {
         //dd('suda');
-        $this->validate($request,[
-            'status'=>'required|max:10',
-            'content'=>'required|max:191',
-        ]);
-
-        $task = Task::find($id);
-        $task->status = $request->status;
-        $task->content = $request->content;
-        $task->save();
+            $this->validate($request,[
+                'status'=>'required|max:10',
+                'content'=>'required|max:191',
+            ]);
+    
+            $task = Task::find($id);
+            
+        if(\Auth::id() === $task->user_id){
+            $task->status = $request->status;
+            $task->content = $request->content;
+            $task->save();
+        }
 
         return redirect('/');
     }
@@ -135,8 +147,11 @@ class TasksController extends Controller
     public function destroy($id)
     {
         $task = Task::find($id);
-        $task->delete();
         
+        if(\Auth::id() === $task->user_id){
+            $task->delete();
+        }
+
         return redirect('/');
     }
 }
